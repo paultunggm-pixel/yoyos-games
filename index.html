@@ -74,10 +74,13 @@ body{background:#000;color:#fff;font-family:-apple-system,"PingFang SC","SF Pro 
       <span class="name">泡泡龙</span>
       <span class="stat" id="bScore">—</span>
     </a>
-    <!-- 贪吃蛇 -->
-    <div class="cell soon"><div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,12px);gap:2px"><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i></i></div><span class="name">贪吃蛇</span></div>
-    <div class="cell soon"><div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,12px);gap:2px"><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i></i></div><span class="name">飞机大战</span></div>
-    <div class="cell soon"><div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,12px);gap:2px"><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i></i></div><span class="name">坦克大战</span></div>
+    '<!-- 贪吃蛇 -->'
+    <a class="cell live" href="https://paultunggm-pixel.github.io/snake/"><div class="icon-box"><span style="font-size:28px">🐍</span></div><span class="name">贪吃蛇</span><span class="stat" id="sScore">—</span></a>
+    '<!-- 飞机大战 -->'
+    <a class="cell live" href="https://paultunggm-pixel.github.io/aircraft/"><div class="icon-box"><span style="font-size:28px">✈️</span></div><span class="name">飞机大战</span><span class="stat" id="aScore">—</span></a>
+    '<!-- 坦克大战 -->'
+    <a class="cell live" href="https://paultunggm-pixel.github.io/tank/"><div class="icon-box"><span style="font-size:28px">🛡️</span></div><span class="name">坦克大战</span><span class="stat" id="kScore">—</span></a>
+    '<!-- 虚位以待 × 3 -->'
     <div class="cell soon"><div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,12px);gap:2px"><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i></i></div><span class="name">小赛车</span></div>
     <div class="cell soon"><div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,12px);gap:2px"><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i></i></div><span class="name">超级玛丽</span></div>
     <div class="cell soon"><div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,12px);gap:2px"><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i></i></div><span class="name">植物大战僵尸</span></div>
@@ -107,8 +110,14 @@ async function loadScores(){
 	    try{var br=await oss.get('bubble_players.json');var bp=JSON.parse(br.content.toString());
 	      var bBest=0;Object.values(bp).forEach(function(p){if(p.best>bBest)bBest=p.best});
 	      if(bBest>0)document.getElementById('bScore').textContent='最高 '+bBest.toLocaleString()+' 分';
-	    }catch(e){}
-  }catch(e){}
+		    }catch(e){}
+		    // 贪吃蛇
+		    try{var sr=await oss.get('snake_players.json');var sp=JSON.parse(sr.content.toString());var sB=0;Object.values(sp).forEach(function(p){if(p.best>sB)sB=p.best});if(sB>0)document.getElementById('sScore').textContent='最高 '+sB.toLocaleString()+' 分'}catch(e){}
+		    // 飞机大战
+		    try{var ar=await oss.get('aircraft_players.json');var ap=JSON.parse(ar.content.toString());var aB=0;Object.values(ap).forEach(function(p){if(p.best>aB)aB=p.best});if(aB>0)document.getElementById('aScore').textContent='最高 '+aB.toLocaleString()+' 分'}catch(e){}
+		    // 坦克大战
+		    try{var kr=await oss.get('tank_players.json');var kp=JSON.parse(kr.content.toString());var kB=0;Object.values(kp).forEach(function(p){if(p.best>kB)kB=p.best});if(kB>0)document.getElementById('kScore').textContent='最高 '+kB.toLocaleString()+' 分'}catch(e){}
+	  }catch(e){}
 }
 loadScores();
 </script>
