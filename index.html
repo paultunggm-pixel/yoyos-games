@@ -24,27 +24,22 @@ body{background:#000;color:#fff;font-family:-apple-system,"PingFang SC","SF Pro 
 .card .icon{font-size:40px;line-height:1}
 .card .name{font-size:13px;font-weight:600;color:#fff;text-align:center}
 .card .stat{font-size:11px;color:#8e8e93;text-align:center}
-.card .soon{font-size:11px;color:#3a3a3c;margin-top:2px}
-.card.disabled{cursor:default;opacity:.6}
+.card .soon{font-size:11px;color:#4a4a4e;margin-top:2px}
+.card.disabled{cursor:default;opacity:.35;filter:grayscale(.5)}
 .card.disabled:hover{border-color:#2c2c2e}
-
-/* 关闭 X */
-.close{position:absolute;top:40px;right:40px;font-size:20px;color:#8e8e93;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%}
-.close:hover{background:#2c2c2e;color:#fff}
+.card.disabled .name,.card.disabled .soon{color:#4a4a4e}
 
 @media(max-width:480px){
   .grid{gap:10px;max-width:360px}
   .card{padding:14px 8px 12px;gap:4px}
-  .card .icon{font-size:32px}
+  .card .icon{font-size:26px}
   .card .name{font-size:11px}
   .page{padding:36px 12px 24px}
-  .close{top:28px;right:16px}
 }
 </style>
 </head>
 <body>
 <div class="page">
-  <a class="close" onclick="window.close()" title="关闭">✕</a>
   <div class="brand">
     <img src="logo.png" alt="">
     <span class="bn">YoYo's Games</span>
@@ -53,24 +48,24 @@ body{background:#000;color:#fff;font-family:-apple-system,"PingFang SC","SF Pro 
   <div class="grid">
     <!-- 俄罗斯方块 -->
     <a class="card" href="https://paultunggm-pixel.github.io/tetris/">
-      <span class="icon">🧱</span>
+      <span class="icon"><i style="display:inline-grid;grid-template-columns:repeat(2,12px);gap:2px"><i style="width:12px;height:12px;border-radius:4px;background:#67e8f9"></i><i style="width:12px;height:12px;border-radius:4px;background:#c084fc"></i><i style="width:12px;height:12px;border-radius:4px;background:#fde047"></i><i style="width:12px;height:12px;border-radius:4px;background:#4ade80"></i></i></span>
       <span class="name">俄罗斯方块</span>
       <span class="stat" id="tScore">—</span>
     </a>
     <!-- 开心消消乐 -->
     <a class="card" href="https://paultunggm-pixel.github.io/candy/">
-      <span class="icon">🍬</span>
+      <span class="icon"><i style="display:inline-grid;grid-template-columns:repeat(3,10px);gap:2px"><i style="width:10px;height:10px;border-radius:50%;background:#ff6b6b"></i><i style="width:10px;height:10px;border-radius:50%;background:#ff9f43"></i><i style="width:10px;height:10px;border-radius:50%;background:#feca57"></i><i style="width:10px;height:10px;border-radius:50%;background:#a29bfe"></i><i style="width:10px;height:10px;border-radius:50%;background:#74b9ff"></i><i style="width:10px;height:10px;border-radius:50%;background:#fd79a8"></i></i></span>
       <span class="name">开心消消乐</span>
       <span class="stat" id="cScore">—</span>
     </a>
     <!-- 虚位以待 × 7 -->
-    <div class="card disabled"><span class="icon">🫧</span><span class="name">泡泡龙</span><span class="soon">即将推出</span></div>
-    <div class="card disabled"><span class="icon">🐍</span><span class="name">贪吃蛇</span><span class="soon">即将推出</span></div>
-    <div class="card disabled"><span class="icon">✈️</span><span class="name">飞机大战</span><span class="soon">即将推出</span></div>
-    <div class="card disabled"><span class="icon">🛡️</span><span class="name">坦克大战</span><span class="soon">即将推出</span></div>
-    <div class="card disabled"><span class="icon">🏎️</span><span class="name">小赛车</span><span class="soon">即将推出</span></div>
-    <div class="card disabled"><span class="icon">🍄</span><span class="name">超级玛丽</span><span class="soon">即将推出</span></div>
-    <div class="card disabled"><span class="icon">🌻</span><span class="name">植物大战僵尸</span><span class="soon">即将推出</span></div>
+    <div class="card disabled"><span class="icon"><i style="display:inline-grid;grid-template-columns:repeat(3,10px);gap:2px"><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i></i></span><span class="name">泡泡龙</span><span class="soon">即将推出</span></div>
+    <div class="card disabled"><span class="icon"><i style="display:inline-grid;grid-template-columns:repeat(3,10px);gap:2px"><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i></i></span><span class="name">贪吃蛇</span><span class="soon">即将推出</span></div>
+    <div class="card disabled"><span class="icon"><i style="display:inline-grid;grid-template-columns:repeat(3,10px);gap:2px"><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i></i></span><span class="name">飞机大战</span><span class="soon">即将推出</span></div>
+    <div class="card disabled"><span class="icon"><i style="display:inline-grid;grid-template-columns:repeat(3,10px);gap:2px"><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i></i></span><span class="name">坦克大战</span><span class="soon">即将推出</span></div>
+    <div class="card disabled"><span class="icon"><i style="display:inline-grid;grid-template-columns:repeat(3,10px);gap:2px"><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i></i></span><span class="name">小赛车</span><span class="soon">即将推出</span></div>
+    <div class="card disabled"><span class="icon"><i style="display:inline-grid;grid-template-columns:repeat(3,10px);gap:2px"><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i></i></span><span class="name">超级玛丽</span><span class="soon">即将推出</span></div>
+    <div class="card disabled"><span class="icon"><i style="display:inline-grid;grid-template-columns:repeat(3,10px);gap:2px"><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i></i></span><span class="name">植物大战僵尸</span><span class="soon">即将推出</span></div>
   </div>
 </div>
 
