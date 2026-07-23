@@ -68,8 +68,13 @@ body{background:#000;color:#fff;font-family:-apple-system,"PingFang SC","SF Pro 
       <span class="name">开心消消乐</span>
       <span class="stat" id="cScore">—</span>
     </a>
-    <!-- 虚位以待 × 7 -->
-    <div class="cell soon"><div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,12px);gap:2px"><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i></i></div><span class="name">泡泡龙</span></div>
+    <!-- 泡泡龙 -->
+    <a class="cell live" href="https://paultunggm-pixel.github.io/bubble/">
+      <div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,14px);gap:3px"><i style="width:14px;height:14px;border-radius:50%;background:#74b9ff"></i><i style="width:14px;height:14px;border-radius:50%;background:#ff9f0a"></i><i style="width:14px;height:14px;border-radius:50%;background:#ff6b6b"></i><i style="width:14px;height:14px;border-radius:50%;background:#a29bfe"></i><i style="width:14px;height:14px;border-radius:50%;background:#4ade80"></i></i></div>
+      <span class="name">泡泡龙</span>
+      <span class="stat" id="bScore">—</span>
+    </a>
+    <!-- 贪吃蛇 -->
     <div class="cell soon"><div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,12px);gap:2px"><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i></i></div><span class="name">贪吃蛇</span></div>
     <div class="cell soon"><div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,12px);gap:2px"><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i></i></div><span class="name">飞机大战</span></div>
     <div class="cell soon"><div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,12px);gap:2px"><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i></i></div><span class="name">坦克大战</span></div>
@@ -96,8 +101,13 @@ async function loadScores(){
     // 消消乐
     try{var cr=await oss.get('candy_players.json');var cp=JSON.parse(cr.content.toString());
       var cBest=0;Object.values(cp).forEach(function(p){if(p.best>cBest)cBest=p.best});
-      if(cBest>0)document.getElementById('cScore').textContent='最高 '+cBest.toLocaleString()+' 分';
-    }catch(e){}
+	    if(cBest>0)document.getElementById('cScore').textContent='最高 '+cBest.toLocaleString()+' 分';
+	    }catch(e){}
+	    // 泡泡龙
+	    try{var br=await oss.get('bubble_players.json');var bp=JSON.parse(br.content.toString());
+	      var bBest=0;Object.values(bp).forEach(function(p){if(p.best>bBest)bBest=p.best});
+	      if(bBest>0)document.getElementById('bScore').textContent='最高 '+bBest.toLocaleString()+' 分';
+	    }catch(e){}
   }catch(e){}
 }
 loadScores();
