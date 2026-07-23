@@ -6,35 +6,45 @@
 <title>YoYo's Games</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#fff;font-family:-apple-system,"PingFang SC","SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:#000;color:#fff;font-family:-apple-system,"PingFang SC","SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
 
-.page{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:48px 20px 32px}
+.page{position:fixed;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;padding:48px 14px 24px;overflow-y:auto;-webkit-overflow-scrolling:touch}
 
 /* 品牌 */
-.brand{display:flex;align-items:center;gap:10px;margin-bottom:6px}
-.brand img{width:48px;height:48px;border-radius:12px}
-.brand .bn{font-size:22px;font-weight:700;letter-spacing:.04em;background:linear-gradient(135deg,#ff375f,#ff9f0a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.tagline{font-size:14px;color:#8e8e93;margin-bottom:36px}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:4px;flex-shrink:0}
+.brand img{width:44px;height:44px;border-radius:10px}
+.brand .bn{font-size:20px;font-weight:700;letter-spacing:.04em;background:linear-gradient(135deg,#ff375f,#ff9f0a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.tagline{font-size:13px;color:#8e8e93;margin-bottom:28px;flex-shrink:0}
 
 /* 九宫格 */
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;max-width:520px}
-.card{background:#1c1c1e;border:1px solid #2c2c2e;border-radius:18px;padding:20px 12px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;text-decoration:none;transition:border-color .2s;aspect-ratio:1;justify-content:center}
-.card:hover{border-color:#ff9f0a}
-.card:active{transform:scale(.96);opacity:.85}
-.card .icon{font-size:40px;line-height:1}
-.card .name{font-size:13px;font-weight:600;color:#fff;text-align:center}
-.card .stat{font-size:11px;color:#8e8e93;text-align:center}
-.card .soon{font-size:11px;color:#4a4a4e;margin-top:2px}
-.card.disabled{cursor:default;opacity:.35;filter:grayscale(.5)}
-.card.disabled:hover{border-color:#2c2c2e}
-.card.disabled .name,.card.disabled .soon{color:#4a4a4e}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;max-width:460px;flex-shrink:0}
+.grid a{text-decoration:none}
 
-@media(max-width:480px){
-  .grid{gap:10px;max-width:360px}
-  .card{padding:14px 8px 12px;gap:4px}
-  .card .icon{font-size:26px}
-  .card .name{font-size:11px}
-  .page{padding:36px 12px 24px}
+.cell{display:flex;flex-direction:column;align-items:center;gap:6px}
+.cell .icon-box{width:100%;aspect-ratio:1;background:#1c1c1e;border:1.5px solid #2c2c2e;border-radius:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s;position:relative}
+.cell .icon-box:active{transform:scale(.96);opacity:.85}
+.cell .icon-box:hover{border-color:#ff9f0a}
+.cell .name{font-size:12px;font-weight:600;color:#fff;text-align:center;line-height:1.2}
+.cell .stat{font-size:10px;color:#8e8e93;text-align:center;margin-top:-2px}
+
+/* 已上线卡片 */
+.cell.live .icon-box{border-color:#3a3a3c}
+.cell.live .icon-box:hover{border-color:#ff9f0a}
+
+/* 未上线卡片 */
+.cell.soon .icon-box{border:1.5px solid rgba(44,44,46,.4);opacity:.4;filter:grayscale(.6);cursor:default}
+.cell.soon .icon-box:hover{border-color:rgba(44,44,46,.4)}
+.cell.soon .icon-box:active{transform:none;opacity:.4}
+.cell.soon .name{color:#4a4a4e}
+
+@media(max-width:400px){
+  .grid{gap:8px;max-width:340px}
+  .cell{gap:4px}
+  .cell .icon-box{border-radius:12px}
+  .cell .name{font-size:10px}
+  .page{padding:36px 10px 20px}
+  .brand img{width:36px;height:36px}
+  .brand .bn{font-size:17px}
 }
 </style>
 </head>
@@ -47,25 +57,25 @@ body{background:#000;color:#fff;font-family:-apple-system,"PingFang SC","SF Pro 
   <div class="tagline">和小伙伴们比比谁更厉害！</div>
   <div class="grid">
     <!-- 俄罗斯方块 -->
-    <a class="card" href="https://paultunggm-pixel.github.io/tetris/">
-      <span class="icon"><i style="display:inline-grid;grid-template-columns:repeat(2,12px);gap:2px"><i style="width:12px;height:12px;border-radius:4px;background:#67e8f9"></i><i style="width:12px;height:12px;border-radius:4px;background:#c084fc"></i><i style="width:12px;height:12px;border-radius:4px;background:#fde047"></i><i style="width:12px;height:12px;border-radius:4px;background:#4ade80"></i></i></span>
+    <a class="cell live" href="https://paultunggm-pixel.github.io/tetris/">
+      <div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(2,18px);gap:3px"><i style="width:18px;height:18px;border-radius:6px;background:#67e8f9"></i><i style="width:18px;height:18px;border-radius:6px;background:#c084fc"></i><i style="width:18px;height:18px;border-radius:6px;background:#fde047"></i><i style="width:18px;height:18px;border-radius:6px;background:#4ade80"></i></i></div>
       <span class="name">俄罗斯方块</span>
       <span class="stat" id="tScore">—</span>
     </a>
     <!-- 开心消消乐 -->
-    <a class="card" href="https://paultunggm-pixel.github.io/candy/">
-      <span class="icon"><i style="display:inline-grid;grid-template-columns:repeat(3,10px);gap:2px"><i style="width:10px;height:10px;border-radius:50%;background:#ff6b6b"></i><i style="width:10px;height:10px;border-radius:50%;background:#ff9f43"></i><i style="width:10px;height:10px;border-radius:50%;background:#feca57"></i><i style="width:10px;height:10px;border-radius:50%;background:#a29bfe"></i><i style="width:10px;height:10px;border-radius:50%;background:#74b9ff"></i><i style="width:10px;height:10px;border-radius:50%;background:#fd79a8"></i></i></span>
+    <a class="cell live" href="https://paultunggm-pixel.github.io/candy/">
+      <div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,14px);gap:3px"><i style="width:14px;height:14px;border-radius:50%;background:#ff6b6b"></i><i style="width:14px;height:14px;border-radius:50%;background:#ff9f43"></i><i style="width:14px;height:14px;border-radius:50%;background:#feca57"></i><i style="width:14px;height:14px;border-radius:50%;background:#a29bfe"></i><i style="width:14px;height:14px;border-radius:50%;background:#74b9ff"></i><i style="width:14px;height:14px;border-radius:50%;background:#fd79a8"></i></i></div>
       <span class="name">开心消消乐</span>
       <span class="stat" id="cScore">—</span>
     </a>
     <!-- 虚位以待 × 7 -->
-    <div class="card disabled"><span class="icon"><i style="display:inline-grid;grid-template-columns:repeat(3,10px);gap:2px"><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i></i></span><span class="name">泡泡龙</span><span class="soon">即将推出</span></div>
-    <div class="card disabled"><span class="icon"><i style="display:inline-grid;grid-template-columns:repeat(3,10px);gap:2px"><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i></i></span><span class="name">贪吃蛇</span><span class="soon">即将推出</span></div>
-    <div class="card disabled"><span class="icon"><i style="display:inline-grid;grid-template-columns:repeat(3,10px);gap:2px"><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i></i></span><span class="name">飞机大战</span><span class="soon">即将推出</span></div>
-    <div class="card disabled"><span class="icon"><i style="display:inline-grid;grid-template-columns:repeat(3,10px);gap:2px"><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i></i></span><span class="name">坦克大战</span><span class="soon">即将推出</span></div>
-    <div class="card disabled"><span class="icon"><i style="display:inline-grid;grid-template-columns:repeat(3,10px);gap:2px"><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i></i></span><span class="name">小赛车</span><span class="soon">即将推出</span></div>
-    <div class="card disabled"><span class="icon"><i style="display:inline-grid;grid-template-columns:repeat(3,10px);gap:2px"><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i></i></span><span class="name">超级玛丽</span><span class="soon">即将推出</span></div>
-    <div class="card disabled"><span class="icon"><i style="display:inline-grid;grid-template-columns:repeat(3,10px);gap:2px"><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i><i style="width:10px;height:10px;border-radius:50%;background:#4a4a4e"></i></i></span><span class="name">植物大战僵尸</span><span class="soon">即将推出</span></div>
+    <div class="cell soon"><div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,12px);gap:2px"><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i></i></div><span class="name">泡泡龙</span></div>
+    <div class="cell soon"><div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,12px);gap:2px"><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i></i></div><span class="name">贪吃蛇</span></div>
+    <div class="cell soon"><div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,12px);gap:2px"><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i></i></div><span class="name">飞机大战</span></div>
+    <div class="cell soon"><div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,12px);gap:2px"><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i></i></div><span class="name">坦克大战</span></div>
+    <div class="cell soon"><div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,12px);gap:2px"><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i></i></div><span class="name">小赛车</span></div>
+    <div class="cell soon"><div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,12px);gap:2px"><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i></i></div><span class="name">超级玛丽</span></div>
+    <div class="cell soon"><div class="icon-box"><i style="display:inline-grid;grid-template-columns:repeat(3,12px);gap:2px"><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i><i style="width:12px;height:12px;border-radius:50%;background:#4a4a4e"></i></i></div><span class="name">植物大战僵尸</span></div>
   </div>
 </div>
 
