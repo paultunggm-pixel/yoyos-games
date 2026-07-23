@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+<title>YoYo's Games</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#fff;font-family:-apple-system,"PingFang SC","SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+.page{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:48px 20px 32px}
+
+/* 品牌 */
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.brand img{width:48px;height:48px;border-radius:12px}
+.brand .bn{font-size:22px;font-weight:700;letter-spacing:.04em;background:linear-gradient(135deg,#ff375f,#ff9f0a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.tagline{font-size:14px;color:#8e8e93;margin-bottom:36px}
+
+/* 九宫格 */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;max-width:520px}
+.card{background:#1c1c1e;border:1px solid #2c2c2e;border-radius:18px;padding:20px 12px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;text-decoration:none;transition:border-color .2s;aspect-ratio:1;justify-content:center}
+.card:hover{border-color:#ff9f0a}
+.card:active{transform:scale(.96);opacity:.85}
+.card .icon{font-size:40px;line-height:1}
+.card .name{font-size:13px;font-weight:600;color:#fff;text-align:center}
+.card .stat{font-size:11px;color:#8e8e93;text-align:center}
+.card .soon{font-size:11px;color:#3a3a3c;margin-top:2px}
+.card.disabled{cursor:default;opacity:.6}
+.card.disabled:hover{border-color:#2c2c2e}
+
+/* 关闭 X */
+.close{position:absolute;top:40px;right:40px;font-size:20px;color:#8e8e93;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.close:hover{background:#2c2c2e;color:#fff}
+
+@media(max-width:480px){
+  .grid{gap:10px;max-width:360px}
+  .card{padding:14px 8px 12px;gap:4px}
+  .card .icon{font-size:32px}
+  .card .name{font-size:11px}
+  .page{padding:36px 12px 24px}
+  .close{top:28px;right:16px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <a class="close" onclick="window.close()" title="关闭">✕</a>
+  <div class="brand">
+    <img src="logo.png" alt="">
+    <span class="bn">YoYo's Games</span>
+  </div>
+  <div class="tagline">和小伙伴们比比谁更厉害！</div>
+  <div class="grid">
+    <!-- 俄罗斯方块 -->
+    <a class="card" href="https://paultunggm-pixel.github.io/tetris/">
+      <span class="icon">🧱</span>
+      <span class="name">俄罗斯方块</span>
+      <span class="stat" id="tScore">—</span>
+    </a>
+    <!-- 开心消消乐 -->
+    <a class="card" href="https://paultunggm-pixel.github.io/candy/">
+      <span class="icon">🍬</span>
+      <span class="name">开心消消乐</span>
+      <span class="stat" id="cScore">—</span>
+    </a>
+    <!-- 虚位以待 × 7 -->
+    <div class="card disabled"><span class="icon">🫧</span><span class="name">泡泡龙</span><span class="soon">即将推出</span></div>
+    <div class="card disabled"><span class="icon">🐍</span><span class="name">贪吃蛇</span><span class="soon">即将推出</span></div>
+    <div class="card disabled"><span class="icon">✈️</span><span class="name">飞机大战</span><span class="soon">即将推出</span></div>
+    <div class="card disabled"><span class="icon">🛡️</span><span class="name">坦克大战</span><span class="soon">即将推出</span></div>
+    <div class="card disabled"><span class="icon">🏎️</span><span class="name">小赛车</span><span class="soon">即将推出</span></div>
+    <div class="card disabled"><span class="icon">🍄</span><span class="name">超级玛丽</span><span class="soon">即将推出</span></div>
+    <div class="card disabled"><span class="icon">🌻</span><span class="name">植物大战僵尸</span><span class="soon">即将推出</span></div>
+  </div>
+</div>
+
+<script src="https://gosspublic.alicdn.com/aliyun-oss-sdk-6.18.1.min.js"></script>
+<script>
+// 加载两个游戏的最高分显示在卡片上
+let oss=null;
+const OSS_BASE='https://tetris-data.oss-cn-hangzhou.aliyuncs.com';
+async function initOSS(){if(oss)return;try{var r=await fetch(OSS_BASE+'/config.json',{cache:'no-cache'});var c=await r.json();oss=new OSS({region:'oss-cn-hangzhou',accessKeyId:c.ak,accessKeySecret:c.sk,bucket:'tetris-data'})}catch(e){}}
+
+async function loadScores(){
+  try{await initOSS();if(!oss)return;
+    // 俄罗斯方块
+    try{var tr=await oss.get('players.json');var tp=JSON.parse(tr.content.toString());
+      var tBest=0;Object.values(tp).forEach(function(p){if(p.best>tBest)tBest=p.best});
+      if(tBest>0)document.getElementById('tScore').textContent='最高 '+tBest.toLocaleString()+' 分';
+    }catch(e){}
+    // 消消乐
+    try{var cr=await oss.get('candy_players.json');var cp=JSON.parse(cr.content.toString());
+      var cBest=0;Object.values(cp).forEach(function(p){if(p.best>cBest)cBest=p.best});
+      if(cBest>0)document.getElementById('cScore').textContent='最高 '+cBest.toLocaleString()+' 分';
+    }catch(e){}
+  }catch(e){}
+}
+loadScores();
+</script>
+</body>
+</html>
